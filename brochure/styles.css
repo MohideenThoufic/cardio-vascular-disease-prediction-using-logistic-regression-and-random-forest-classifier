@@ -1,0 +1,132 @@
+/* Brand palette */
+:root {
+  --ink: #1f2937;         /* slate-800 */
+  --muted-ink: #374151;   /* gray-700 */
+  --paper: #fffdf7;       /* warm paper */
+  --line: #e5e7eb;        /* gray-200 */
+  --green: #166534;       /* green-700 */
+  --leaf: #22c55e;        /* green-500 */
+  --gold: #b45309;        /* amber-700 */
+  --plum: #7c3aed;        /* violet-600 */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #eef2f7; /* screen preview background */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.25;
+  margin: 0 0 0.5rem 0;
+}
+
+p { margin: 0 0 0.75rem 0; }
+ul { margin: 0 0 0.75rem 1.1rem; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Page sizing and print */
+@page { size: A4; margin: 12mm; }
+
+.brochure { padding: 16px; }
+
+.page {
+  background: var(--paper);
+  width: 210mm;              /* A4 width for screen preview */
+  min-height: 297mm;         /* A4 height for screen preview */
+  margin: 16px auto;         /* center on screen */
+  padding: 16mm;             /* generous margins that translate to print */
+  box-shadow: 0 3px 30px rgba(2, 6, 23, 0.15);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  page-break-after: always;
+}
+.page:last-child { page-break-after: auto; }
+
+.footer {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  color: var(--muted-ink);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.page-number::after { content: "Page " counter(page); }
+
+/* Layout helpers */
+.two-col {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.category-grid, .picks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.card, .pick {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.eyebrow { color: var(--gold); letter-spacing: 0.02em; margin-bottom: 8px; }
+
+/* Cover */
+.cover {
+  background: linear-gradient(135deg, #f7fee7 0%, #ecfeff 40%, #f5f3ff 100%);
+  grid-template-rows: auto auto 1fr auto;  /* include hero */
+}
+.masthead { text-align: center; margin-top: 12mm; }
+.masthead h1 { font-size: 44px; color: var(--green); }
+.masthead .tagline { font-size: 16px; color: var(--muted-ink); }
+.hero { margin: 8mm auto 0 auto; max-width: 160mm; }
+.highlights { display: flex; gap: 12px; justify-content: center; list-style: none; padding: 0; margin: 6mm 0 0 0; color: var(--muted-ink); }
+.highlights li { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+
+/* About */
+.about h2 { color: var(--green); }
+.checklist { list-style: none; padding: 0; }
+.checklist li { position: relative; padding-left: 26px; margin: 6px 0; }
+.checklist li::before {
+  content: "✔";
+  position: absolute; left: 0; top: 0; color: var(--leaf);
+}
+
+/* Categories */
+.categories h2 { color: var(--plum); }
+.card h3 { margin-bottom: 4px; }
+.card p { color: var(--muted-ink); }
+
+/* Picks */
+.picks h2 { color: var(--gold); }
+.art.wide { margin-top: 8px; }
+
+/* Events */
+.events h2 { color: var(--green); }
+.hours th { text-align: left; padding-right: 12px; }
+.hours td { color: var(--muted-ink); }
+
+/* Contact */
+.contact h2 { color: var(--plum); }
+
+/* Print tweaks */
+@media print {
+  body { background: transparent; }
+  .brochure { padding: 0; }
+  .page { width: auto; min-height: auto; margin: 0; box-shadow: none; border: none; padding: 12mm; }
+  .hero { max-width: none; }
+}
